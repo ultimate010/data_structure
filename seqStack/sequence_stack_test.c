@@ -21,4 +21,5 @@ int main(){
   printf("\n");
   clear_seqStack(&stack);
   destroy_seqStack(&stack);
+  return 0;
 }

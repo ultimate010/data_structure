@@ -42,6 +42,7 @@ status ini_seqStack(seqStack * stack){
  * 销毁栈，释放空间
  */
 status destroy_seqStack(seqStack* stack){
+  if(stack->m_base == NULL) return ERROR;
   free(stack->m_base);
   stack->m_base = stack->m_top = NULL;
   stack->m_stackSize = stack->m_maxStackSize = 0;

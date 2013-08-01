@@ -28,7 +28,8 @@ status destroy_seqList(seq_list* list);
 
 
 status destroy_seqList(seq_list* list){
-  free(list->m_pList);
+  if(list->m_pList == NULL) return ERROR;
+  free(list->m_pList); list->m_pList = NULL;
   list->m_listSize = list->m_maxListSize = 0;
 }
 
