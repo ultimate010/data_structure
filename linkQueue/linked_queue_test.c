@@ -3,7 +3,7 @@
 
 int main(){
   linked_queue queue;
-  ini_linedQueue(&queue);
+  ini_linkedQueue(&queue);
   int i = 0;
   for(i = 0;i < 100;i++){
     int * data = (int *) malloc(sizeof(int));

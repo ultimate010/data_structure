@@ -17,9 +17,11 @@ typedef struct{
   queueNode* m_front;
   queueNode* m_rear;
 }linked_queue;
-status ini_linedQueue(linked_queue* queue);
+status ini_linkedQueue(linked_queue* queue);
 status destroy_linkedQueue(linked_queue* queue);
+status clear_linkedQueue(linked_queue * queue);
 status getHead_linkedQueue(linked_queue* queue,void** data);
+status empty_linkedQueue(linked_queue * queue);
 unsigned int length_linkedQueue(linked_queue* queue);
 status deQueue_linkedQueue(linked_queue* queue,void** data);
 status enQueue_linkedQueue(linked_queue* queue,void* data);
@@ -27,7 +29,7 @@ status enQueue_linkedQueue(linked_queue* queue,void* data);
 /*
  * 初始化操作
  */
-status ini_linedQueue(linked_queue* queue){
+status ini_linkedQueue(linked_queue* queue){
   queue->m_front = queue->m_rear = NULL;
   return OK;
 }
@@ -41,6 +43,17 @@ status destroy_linkedQueue(linked_queue* queue){
     node = queue->m_front;
     queue->m_front = node->m_next;
     if(node->m_data) free(node->m_data);
+    free(node);
+  }
+  queue->m_front = queue->m_rear = NULL;
+  return OK;
+}
+
+status clear_linkedQueue(linked_queue * queue){
+  queueNode* node = NULL;
+  while(queue->m_front != NULL){
+    node = queue->m_front;
+    queue->m_front = node->m_next;
     free(node);
   }
   queue->m_front = queue->m_rear = NULL;
@@ -66,6 +79,11 @@ unsigned int length_linkedQueue(linked_queue* queue){
     node = node->m_next; ++len;
   }
   return len;
+}
+
+status empty_linkedQueue(linked_queue * queue){
+  if(queue->m_front == NULL) return TRUE;
+  return FALSE;
 }
 
 /*
