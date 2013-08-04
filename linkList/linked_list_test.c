@@ -27,6 +27,6 @@ int main(){
     getEle_linkList(list,i,&ele);
     printf("%d ",ele);
   }
-  destroy_linkList(list);
+  destroy_linkList(&list);
   return 0;
 }

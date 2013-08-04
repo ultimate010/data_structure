@@ -17,15 +17,16 @@ status insBack_linkList(linkList list,ELETYPE ele);
 status ins_linkList(linkList list,const int i,ELETYPE  ele);
 status delBack_linkList(linkList list,ELETYPE* ele);
 status del_linkList(linkList list,const int i,ELETYPE* ele);
-status destroy_linkList(linkList list);
+status destroy_linkList(linkList * list);
 
-status destroy_linkList(linkList list){
-  linkNode* p = list,* pDel;
-  while(p->m_next){
-    pDel = p->m_next;
-    p = pDel->m_next;
+status destroy_linkList(linkList * list){
+  linkNode * pDel;
+  while((*list)->m_next){
+    pDel = (*list)->m_next;
+    (*list)->m_next = pDel->m_next;
     free(pDel);
   }
+  free(*list); *list = NULL;
   return OK;
 }
 /*
