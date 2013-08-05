@@ -21,6 +21,7 @@ status clear_linkedStack(linkStack * stack);
 status destroy_linkedStack(linkStack * stack);
 status push_linkedStack(linkStack * stack,void * data);
 status pop_linkedStack(linkStack * stack,void ** data);
+status getTop_linkedStack(linkStack * stack,void ** data);
 
 status ini_linkedStack(linkStack * stack){
   stackNode * p = (stackNode*) malloc(sizeof(stackNode));
@@ -90,4 +91,9 @@ status pop_linkedStack(linkStack * stack,void ** data){
   return OK;
 }
 
+status getTop_linkedStack(linkStack * stack,void ** data){
+  if(*stack == (*stack)->m_pre) return ERROR;
+  *data = (*stack)->m_pre->m_data;
+  return OK;
+}
 #endif
