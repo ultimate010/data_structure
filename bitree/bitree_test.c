@@ -8,7 +8,10 @@ void visit(void * data){
 
 int main(){
   biTree tree;
-  iniPreOrder_bitree(&tree);
+  char * arr = "ABC  DE G  F   ";
+  char ** array = &arr;
+  //iniPreOrder_bitree(&tree);
+  iniFromArr_bitree(&tree,array);
   printf("This is preOrder\n");
   preOrder_bitree(&tree,&visit);
   printf("This is inOrder\n");
@@ -20,7 +23,7 @@ int main(){
   printf("This is preOrder iterater\n");
   preOrder_iterate_bitree(&tree,&visit);
   printf("This is inOrder iterater\n");
-  inOrder_iterate_bitree(&tree,&visit);
+  inOrder_iterate_bitree1(&tree,&visit);
   destroy_bitree(&tree);
   if(tree == NULL) printf("Destroyed\n");
   return 0;
