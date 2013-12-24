@@ -304,7 +304,15 @@ void outputForest(const CSTree & T){
     p = p->nsibling;
   }
 }
-
+void outputForest0(const CSTree & T,int level){
+  if(T == NULL){
+    return ;
+  }
+  for(int i = 0;i < level;i++){ cout <<"\t"; }
+  cout <<T->data <<endl;
+  outputForest0(T->fchild,level + 1);
+  outputForest0(T->nsibling,level);
+}
 
 int main()
 {
@@ -319,6 +327,7 @@ int main()
   G_To_F(m,T);    //矩阵转化成森林
   cout <<"The trees is " <<endl;
   outputForest(T);    //输出子女兄弟森林
+  outputForest0(T,0); //新的输出方式,更简单
   clearForest(T);
   clearGraph(a);
   return 0;
