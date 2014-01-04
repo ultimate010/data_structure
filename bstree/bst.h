@@ -58,7 +58,7 @@ status insert_bstree(bstree * pRoot,void * value,compareFunc compare){
 	  p = &((*p)->m_right);
 	}
   }
-  *p = (bsnode *) malloc(sizeof(bsnode));
+  *p = (bsnode *) malloc(sizeof(bsnode)); (*p)->m_left = (*p)->m_right = NULL;
   if(*pRoot == NULL){
 	return OVERFLOW;
   }
