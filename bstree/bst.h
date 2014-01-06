@@ -84,6 +84,7 @@ status delete_bstree(bstree * pRoot,void * value,compareFunc compare){
 	  *pLeft = (*p)->m_right; //把待删除节点的右孩子接过去
 	  bstree pDel = (*p); //指向待删除节点的指针
 	  *p = pDel->m_left;
+	  free(pDel->m_data); //释放data域
 	  free(pDel); //释放待删除节点
 	  return TRUE;
 	}else if(compare((*p)->m_data,value) == GREATER){
