@@ -31,7 +31,7 @@ int main(){
 	}
   }
   printf("Insert [0,36) tree is \n");
-  inOrder_bstree(tree,myPrint);
+  inOrder_bstree(&tree,myPrint);
   for(i = 40;i > 1;i--){
 	pData = (int *) malloc(sizeof(int));
 	*pData = i;
@@ -41,7 +41,7 @@ int main(){
   }
   printf("\n");
   printf("Insert (1,40] tree is \n");
-  inOrder_bstree(tree,myPrint);
+  inOrder_bstree(&tree,myPrint);
   printf("\n");
   pData = (int *) malloc(sizeof(int));
   for(i = 23;i < 30;i++){
@@ -51,7 +51,7 @@ int main(){
 	}
   }
   printf("After delete [23,30)\n");
-  inOrder_bstree(tree,myPrint);
+  inOrder_bstree(&tree,myPrint);
   printf("\n");
   for(i = 53;i >= 0;i--){
 	*pData = i;
@@ -61,7 +61,7 @@ int main(){
   }
   printf("\n");
   printf("After delete [53,0]\n");
-  inOrder_bstree(tree,myPrint);
+  inOrder_bstree(&tree,myPrint);
   printf("\n");
   free(pData);
   if(empty_bstree(&tree) == TRUE){

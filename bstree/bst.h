@@ -18,15 +18,15 @@ typedef void (*visitFunc)(void * a); //遍历访问函数
 status ini_bstree(bstree * pRoot); //初始化操作,赋值为NULL
 status insert_bstree(bstree * pRoot,void * value,compareFunc func); //插入元素操作
 status delete_bstree(bstree * pRoot,void * value,compareFunc func); //删除元素操作
-status find_bstree(bstree * pRoot,void * value,compareFunc func); //查找元素是否存在
-status inOrder_bstree(bstree pRoot,visitFunc visit); //中序遍历函数
+status find_bstree(const bstree * pRoot,void * value,compareFunc func); //查找元素是否存在
+status inOrder_bstree(const bstree * pRoot,visitFunc visit); //中序遍历函数
 status free_bstree(bstree * pRoot); //清空树
-status empty_bstree(bstree * pRoot); //判断是否为空
+status empty_bstree(const bstree * pRoot); //判断是否为空
 /*	private func define	*/
 void _free_bstree(bstree p);
-void _inOrder_bstree(bstree p,visitFunc visit);
+void _inOrder_bstree(const bstree p,visitFunc visit);
 /*	implement	*/
-status empty_bstree(bstree * pRoot){
+status empty_bstree(const bstree * pRoot){
   return (*pRoot == NULL)?TRUE:FALSE;
 }
 /*	private func define	*/
@@ -102,8 +102,8 @@ status delete_bstree(bstree * pRoot,void * value,compareFunc compare){
  * @func 比较函数
  * @return 找到返回TRUE,找不到返回FALSE
  */
-status find_bstree(bstree * pRoot,void * value,compareFunc compare){
-  bstree * p = pRoot;
+status find_bstree(const bstree * pRoot,void * value,compareFunc compare){
+  const bstree * p = pRoot;
   while(*p){
 	if(compare((*p)->m_data,value) == EQUAL){
 	  return TRUE;
@@ -147,9 +147,9 @@ void _free_bstree(bstree p){
  * @visit 访问函数
  * @return 成功返回TRUE,错误返回FALSE
  */
-status inOrder_bstree(bstree pRoot,visitFunc visit){
-  if(pRoot){
-	_inOrder_bstree(pRoot,visit);
+status inOrder_bstree(const bstree * pRoot,visitFunc visit){
+  if(*pRoot){
+	_inOrder_bstree(*pRoot,visit);
 	return TRUE;
   }else{
 	return FALSE;
@@ -160,7 +160,7 @@ status inOrder_bstree(bstree pRoot,visitFunc visit){
  * @p 指针
  * @visit 访问函数
  */
-void _inOrder_bstree(bstree p,visitFunc visit){
+void _inOrder_bstree(const bstree p,visitFunc visit){
   if(p){
 	_inOrder_bstree(p->m_left,visit);
 	visit(p->m_data);
