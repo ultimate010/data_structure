@@ -137,6 +137,7 @@ void _free_bstree(bstree p){
   if(p){
 	_free_bstree(p->m_left);
 	_free_bstree(p->m_right);
+	if(p->m_data){ free(p->m_data); }
 	free(p);
   }
 }
