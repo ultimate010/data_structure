@@ -1,7 +1,7 @@
 #ifndef __LINKED_LIST_H__
 #define __LINKED_LIST_H__
 /*
- * 定义代表头结点的单链表的操作
+ * 定义带表头结点的单链表的操作
  * 2013-4-1
  * Zaks Wang
  */
@@ -18,7 +18,9 @@ status ins_linkList(linkList list,const int i,ELETYPE  ele);
 status delBack_linkList(linkList list,ELETYPE* ele);
 status del_linkList(linkList list,const int i,ELETYPE* ele);
 status destroy_linkList(linkList * list);
-
+/*
+ * 删掉所有结点,包括头结点
+ */
 status destroy_linkList(linkList * list){
   linkNode * pDel;
   while((*list)->m_next){
@@ -28,6 +30,48 @@ status destroy_linkList(linkList * list){
   }
   free(*list); *list = NULL;
   return OK;
+}
+
+/*
+ * core low level coding 
+ * 删掉表头结点
+ */
+status destroy_linkList_v1(linkList * list){
+  linkList pDel;
+  while(*list){
+    pDel = *list;
+    *list = pDel->m_next;
+    free(pDel);
+  }
+  return OK;
+}
+
+typedef status (* del_fun)(linkList p);
+status del_linkList(linkList pNode, del_fun rm){
+    linkList pDel = NULL;
+    while(pNode->m_next){ // The node after header
+        if(rm(pNode->m_next) == OK){
+            pDel = pNode->m_next;
+            pNode = pDel->m_next;
+            free(pDel);
+        }else{
+            pNode = pNode->m_next;
+        }
+    }
+    return OK;
+}
+
+status del_linkList_v1(linkList * list, del_fun rm){
+    linkList pCur = *list;
+    while(pCur){
+        if(rm(pCur) == OK){
+            if(pCur == *list){
+            }else{
+            }
+        }else{
+        }
+    }
+    return OK;
 }
 /*
  * 初始化表头结点
