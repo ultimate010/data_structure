@@ -20,7 +20,7 @@ int main(){
     printf("%d\t",a[i]);
   }
   insertSort(a,11);
-  printf("\n",a[i]);
+  printf("\n");
   for(i = 0;i < 11;i++){
     printf("%d\t",a[i]);
   }
